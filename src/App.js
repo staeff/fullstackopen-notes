@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Note from './components/Note'
 
-const App = ({notes}) => {
+const App = (props) => {
+  // pass array of notes to useState to
+  // initialize the piece of state stored in notes
+  const [notes, setNodes] = useState(props.notes)
+
 
   return (
     <div>
