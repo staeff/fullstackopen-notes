@@ -6,6 +6,10 @@ const App = (props) => {
   // initialize the piece of state stored in notes
   const [notes, setNodes] = useState(props.notes)
 
+  const addNote = (event) => {
+    event.preventDefault()
+    console.log('button clicked', event.target)
+  }
 
   return (
     <div>
@@ -15,7 +19,12 @@ const App = (props) => {
           <Note key={note.id} note={note} />
         )}
       </ul>
+      <form onSubmit={addNote}>
+        <input type="text" />
+        <button type='submit'>save</button>
+      </form>
     </div>
+
   )
 }
 
