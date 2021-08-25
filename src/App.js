@@ -6,6 +6,7 @@ const App = (props) => {
   // initialize the piece of state stored in notes
   const [notes, setNotes] = useState(props.notes)
   const [newNote, setNewNote] = useState('a new note...')
+  const [showAll, setShowAll] = useState(true)
 
   // function to create new notes
   const addNote = (event) => {
@@ -29,11 +30,17 @@ const App = (props) => {
     setNewNote(event.target.value)
   }
 
+  // Use a ternary expression to decide whether notes should be filtered
+  // filtering is done by the filter method of array
+  const notesToShow = showAll
+        ? notes
+        : notes.filter(note => note.important === true)
+
   return (
     <div>
       <h1>Notes</h1>
       <ul>
-        {notes.map(note =>
+        {notesToShow.map(note =>
           <Note key={note.id} note={note} />
         )}
       </ul>
@@ -44,7 +51,6 @@ const App = (props) => {
         <button type='submit'>save</button>
       </form>
     </div>
-
   )
 }
 
