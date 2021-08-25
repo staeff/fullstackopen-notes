@@ -34,7 +34,7 @@ const App = (props) => {
   // filtering is done by the filter method of array
   const notesToShow = showAll
         ? notes
-        : notes.filter(note => note.important === true)
+        : notes.filter(note => note.important)
 
   return (
     <div>
