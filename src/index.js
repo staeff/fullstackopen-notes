@@ -1,5 +1,9 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios'
+
 import App from './App';
+
 
 const notes = [
   {
@@ -21,6 +25,18 @@ const notes = [
     important: true
   }
 ]
+
+// json-server is running on port 3001 (npx json-server -p3001 --watch db.json)
+
+// The get method of axios returns a promise
+
+// promise is fullfilled eventually because /notes exists
+const promise = axios.get('http://localhost:3001/notes')
+console.log(promise)
+
+// promise is rejected eventually because /foobar not exists
+const promise2 = axios.get('http://localhost:3001/foobar')
+console.log(promise2)
 
 ReactDOM.render(
   <App notes={notes} />,
