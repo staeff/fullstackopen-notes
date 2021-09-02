@@ -10,7 +10,7 @@ const App = () => {
   // An example of an effect hook
   // a call to a state-updating function (setNotes) triggers the re-rendering
   // of the component
-  useEffect(() => {
+  const hook = () => {
     console.log('effect')
     axios
       .get('http://localhost:3001/notes')
@@ -18,7 +18,12 @@ const App = () => {
         console.log('promise fulfilled')
         setNotes(response.data)
       })
-  }, [])
+  }
+
+  // useEffect takes two parameters, first a function (the effect itself)
+  // the second parameter is used to specify how often the effect is run
+  // [] = the effect is only run along with the first render of the component
+  useEffect(hook, [])
   console.log('render', notes.length, 'notes')
 
   // function to create new notes
