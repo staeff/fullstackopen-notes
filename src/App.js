@@ -34,13 +34,20 @@ const App = () => {
       content: newNote,
       date: new Date().toISOString(),
       important: Math.random() < 0.5, // 50% chance that a note is marked important
-      id: notes.length + 1,
+      // id: notes.length + 1, noteObject is posted to REST Server and ids a better
+      // created on the server side
     }
 
-    // Added to the list of notes using the array method concat
-    // to create a copy and not mutate the original object
-    setNotes(notes.concat(noteObject))
-    setNewNote('')
+    //
+    axios
+      .post('http://localhost:3001/notes', noteObject)
+      .then(response => {
+        console.log(response)
+        // Added to the list of notes using the array method concat
+        // to create a copy and not mutate the original object
+        setNotes(notes.concat(noteObject))
+        setNewNote('')
+      })
   }
 
   const handleNoteChange = (event) => {
