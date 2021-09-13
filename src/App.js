@@ -61,8 +61,22 @@ const App = () => {
         ? notes
         : notes.filter(note => note.important)
 
-  const toggleImportanceOf = (id) => {
-    console.log(`importance of ${id} needs to be toggled`)
+  const toggleImportanceOf = id => {
+    // construct the unique url of the single note to be changed
+    const url = `http://localhost:3001/notes/${id}`
+    // Get the note with the passed in id by using the find method of the array
+    const note = notes.find(n => n.id === id)
+    // Create a copy of the note by using the spread syntax
+    // and toggle the value of important
+    // { ...note } creates a new object with copies of all the properties from the note object
+    // additional properties like important in this case, get added or
+    // updated in the new object
+    const changedNote = {...note, important: !note.important}
+
+    // Use put method to partially update a ressource
+    axios.put(url, changedNote).then(response => {
+      setNotes(notes.map(note => note.id !== id ? note : response.data))
+    })
   }
 
   return (
