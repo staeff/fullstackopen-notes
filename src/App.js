@@ -13,8 +13,8 @@ const App = () => {
   const hook = () => {
     noteService
       .getAll()
-      .then(response => {
-        setNotes(response.data)
+      .then(initialNotes => {
+        setNotes(initialNotes)
       })
   }
 
@@ -38,10 +38,10 @@ const App = () => {
 
     noteService
       .create(noteObject)
-      .then(response => {
+      .then(returnedNote => {
         // Added to the list of notes using the array method concat
         // to create a copy and not mutate the original object
-        setNotes(notes.concat(noteObject))
+        setNotes(notes.concat(returnedNote))
         setNewNote('')
       })
   }
@@ -69,8 +69,8 @@ const App = () => {
 
     noteService
     .update(id, changedNote)
-    .then(response => {
-      setNotes(notes.map(note => note.id !== id ? note : response.data))
+    .then(returnedNote => {
+      setNotes(notes.map(note => note.id !== id ? note : returnedNote))
     })
   }
 
