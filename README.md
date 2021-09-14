@@ -10,6 +10,4 @@ JavaScript engines (i.e. the runtime environments in the browsers) follow the as
 
 ## Loose Ends
 
-* A newly added note (without reload) fails the switch "make important", because it's `id` is undefined. After reload it works alright.
-
 
