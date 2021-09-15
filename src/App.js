@@ -75,6 +75,10 @@ const App = () => {
     .then(returnedNote => {
       setNotes(notes.map(note => note.id !== id ? note : returnedNote))
     })
+    .catch(error => {
+      console.log(`Note ${note.content} not found. ${error}`)
+      setNotes(notes.filter(n => n.id !== id))
+    })
   }
 
   return (
