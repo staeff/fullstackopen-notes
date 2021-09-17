@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import Note from './components/Note'
+import Notification from './components/Notification'
 import noteService from './services/notes'
+
 
 const App = () => {
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('a new note...')
   const [showAll, setShowAll] = useState(true)
+  const [errorMessage, setErrorMessage] = useState('some error happened')
 
   // An example of an effect hook
   // a call to a state-updating function (setNotes) triggers the re-rendering
@@ -77,6 +80,7 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
+      <Notification msg={errorMessage} />
       <button onClick={() => setShowAll(!showAll)}>
         show {showAll ? 'important' : 'all'}
       </button>
