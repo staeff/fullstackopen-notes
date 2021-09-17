@@ -8,7 +8,7 @@ const App = () => {
   const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('a new note...')
   const [showAll, setShowAll] = useState(true)
-  const [errorMessage, setErrorMessage] = useState('some error happened')
+  const [errorMessage, setErrorMessage] = useState(null)
 
   // An example of an effect hook
   // a call to a state-updating function (setNotes) triggers the re-rendering
@@ -76,7 +76,10 @@ const App = () => {
       setNotes(notes.map(note => note.id !== id ? note : returnedNote))
     })
     .catch(error => {
-      console.log(`Note ${note.content} not found. ${error}`)
+      setErrorMessage(`Note ${note.content} not found. ${error}`)
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
       setNotes(notes.filter(n => n.id !== id))
     })
   }
